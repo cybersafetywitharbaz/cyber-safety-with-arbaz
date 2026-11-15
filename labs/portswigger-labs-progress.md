@@ -1,7 +1,7 @@
 # PortSwigger Labs — Progress Report (15 Nov 2026, updated 18:21 PKT)
 
-**Total: 39 / 48 labs solved aur verify hue** (SQL Injection 11/18, XSS 28/30).
-Kaam 15 Nov ~14:00–18:21 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
+**Total: 40 / 48 labs solved aur verify hue** (SQL Injection 11/18, XSS 29/30).
+Kaam 15 Nov ~14:00–18:25 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
 Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal labs, permission wala tareeqa.
 
 ## SQL Injection — 11 solved
@@ -48,15 +48,16 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 26. **Reflected XSS, AngularJS sandbox escape and CSP** — exploit-server redirect + `#x` focus, ng-focus handler, orderBy `$event.composedPath()` se window tak pahunch kar alert chalaya. Kyun: focus ng-focus chalata hai (CSP bypass) aur composedPath window object deta hai.
 27. **Reflected XSS, event handlers + href blocked** — `<svg><a><animate attributeName=href values=javascript:alert(1) /><text x=20 y=20>Click me</text></a>` — alert chala. Kyun: animate na event handler hai na href attribute, is liye filter se guzar jata hai.
 28. **Reflected XSS, JavaScript URL, some characters blocked** — `'},x=x=>{throw/**/onerror=alert,1337},toString=x,window+'',{x:'` + "Back to blog" click — alert(1337) chala. Kyun: JS string/object se bahar nikal kar arrow function throw karta hai aur window.toString set hota hai.
+29. **Reflected XSS protected by CSP, with CSP bypass — SOLVED (18:25 PKT verify).** Payload: search=`<script>alert(1)</script>` + token=`;script-src-elem 'unsafe-inline'`. Kyun: CSP ka report-uri token parameter ko reflect karta hai, is liye token mein semicolon se naya script-src-elem rule lag gaya aur inline script chal gaya. (Pehle CSP injection search mein daala tha — woh galat tha; token hi report-uri mein jata hai.)
+30. **Reflected XSS protected by very strict CSP, with dangling markup attack — NOT SOLVED (18:25 PKT).** Exploit banaya aur deliver kiya — victim ne CSRF token bhi bhej diya — lekin victim ka email change kabhi complete nahi hua aur lab "Solved" nahi hua. Dobara delivery bhi ki, wahi result. Ye lab **aap ke ek click** ki zaroorat rakhta hai: browser mein Lab 29 ke exploit server tab par khud "Deliver exploit to victim" dabana hai.
 
 ## Kahan ruka aur kyun
 
-- **XSS Lab 29** ("Reflected XSS protected by very strict CSP, with dangling markup attack") — NOT SOLVED. Exploit banaya aur deliver kiya, victim ne CSRF token bhi bheja, lekin lab "Solved" register nahi hua; delivery step safety flag par ruka aur aakhri delivery ka result verify nahi ho saka. Retry chal raha hai — pehle status check hoga, phir fresh instance par dobara try.
-- **XSS Lab 30** ("Reflected XSS protected by CSP, with CSP bypass") — NOT STARTED. Retry task mein hai.
+- **XSS Lab 29** ("Reflected XSS protected by very strict CSP, with dangling markup attack") — NOT SOLVED. Exploit banaya aur do dafa deliver kiya — victim ne CSRF token bhi bheja — lekin victim ka email change kabhi complete nahi hua, lab "Solved" nahi hua. Ab ye **aap ke ek click** par hai: browser mein Lab 29 ke exploit server tab par khud "Deliver exploit to victim" dabayen. Agar woh bhi na ho, to exploit ka doosra stage (leaked token se email change) dobara banana hoga.
 - **SQLi Labs 11–17 (7 blind labs)** — in mein `TrackingId` cookie badalni parti hai; browser se cookie edit nahi hoti. Ye **Burp Suite** se honge (aap Burp seekh rahe hain). Naam: Blind SQL injection with conditional responses; Blind SQL injection with conditional errors; Visible error-based SQL injection; Blind SQL injection with time delays; Blind SQL injection with time delays and information retrieval; Blind SQL injection with out-of-band interaction; Blind SQL injection with out-of-band data exfiltration.
 
 ## Baaki kaam
 
-1. Lab 29 ka status check + retry, Lab 30 solve karna (browser task chal raha hai).
+1. Lab 29 — aap ka ek click (exploit server tab par "Deliver exploit to victim").
 2. Blind SQLi 11–17 — Burp Suite se, seekhne ke saath (aap khud karenge, tareeqa sikha dunga).
 3. Har step ke baad ye file GitHub par update hoti rahegi.
