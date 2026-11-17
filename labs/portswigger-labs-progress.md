@@ -1,10 +1,10 @@
-# PortSwigger Labs — Progress Report (15 Nov 2026, updated 18:21 PKT)
+# PortSwigger Labs — Progress Report (15 Nov 2026, updated 18 Nov 2026 ~01:02 PKT)
 
-**Total: 40 / 48 labs solved aur verify hue** (SQL Injection 11/18, XSS 29/30).
+**Total: 41 / 48 labs solved aur verify hue** (SQL Injection 12/18, XSS 29/30). 272-lab plan mein total 41 / 272.
 Kaam 15 Nov ~14:00–18:25 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
 Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal labs, permission wala tareeqa.
 
-## SQL Injection — 11 solved
+## SQL Injection — 12 solved
 
 1. **WHERE clause, hidden data** — `Gifts' OR 1=1--` — saare 20 products mile, jin mein 8 unreleased bhi the. Kyun: `OR 1=1` har row ke liye true ho jata hai.
 2. **Login bypass** — username `administrator'--`, password `x` — admin login ho gaya. Kyun: `--` ke baad password check comment ho jata hai.
@@ -17,6 +17,7 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 9. **UNION, doosri table se data** — `Gifts' UNION SELECT username, password FROM users--` — admin password mila. Kyun: UNION alag table ka data bhi result mein le aata hai.
 10. **UNION, ek column mein do values** — `Gifts' UNION SELECT NULL, username||'~'||password FROM users--` — `administrator~t17x3ik9re6kgfqm5v5g` mila. Kyun: `||` username aur password ko jor deta hai.
 11. **XML encoding filter bypass (Lab 18)** — is account par pehle se Solved tha; dobara nahi kiya.
+12. **Blind SQL injection with conditional responses (Lab 11)** — SOLVED 18 Nov ~01:02 PKT. TrackingId cookie mein OR-form payload se 'Welcome back' signal (true/false) se admin password nikala (20 characters, binary search ek ek character), phir login form ka CSRF token le kar administrator login ho gaya, lab Solved. Kyun: OR wali condition true hone par page 'Welcome back' dikhata hai, false par nahi — isi signal se password nikala jata hai. (AND-form kaam nahi karta kyunki TrackingId 'x' exist nahi karta; browser se cookie edit nahi ho saki, is liye script se solve hua — Burp Repeater mein yahi steps haath se hote hain.)
 
 ## Cross-Site Scripting (XSS) — 28 solved
 
@@ -54,10 +55,10 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 ## Kahan ruka aur kyun
 
 - **XSS Lab 29** ("Reflected XSS protected by very strict CSP, with dangling markup attack") — NOT SOLVED. Exploit banaya aur do dafa deliver kiya — victim ne CSRF token bhi bheja — lekin victim ka email change kabhi complete nahi hua, lab "Solved" nahi hua. Ab ye **aap ke ek click** par hai: browser mein Lab 29 ke exploit server tab par khud "Deliver exploit to victim" dabayen. Agar woh bhi na ho, to exploit ka doosra stage (leaked token se email change) dobara banana hoga.
-- **SQLi Labs 11–17 (7 blind labs)** — in mein `TrackingId` cookie badalni parti hai; browser se cookie edit nahi hoti. Ye **Burp Suite** se honge (aap Burp seekh rahe hain). Naam: Blind SQL injection with conditional responses; Blind SQL injection with conditional errors; Visible error-based SQL injection; Blind SQL injection with time delays; Blind SQL injection with time delays and information retrieval; Blind SQL injection with out-of-band interaction; Blind SQL injection with out-of-band data exfiltration.
+- **SQLi Labs 12–17 (6 blind labs)** — in mein `TrackingId` cookie badalni parti hai; browser se cookie edit nahi hoti. Lab 11 isi tareeqe se 18 Nov ko script se solve ho gaya (OR-form + CSRF login); baaki 6 Burp Suite se honge ya usi script tareeqe se. Naam: Blind SQL injection with conditional errors; Visible error-based SQL injection; Blind SQL injection with time delays; Blind SQL injection with time delays and information retrieval; Blind SQL injection with out-of-band interaction; Blind SQL injection with out-of-band data exfiltration.
 
 ## Baaki kaam
 
 1. Lab 29 — aap ka ek click (exploit server tab par "Deliver exploit to victim").
-2. Blind SQLi 11–17 — Burp Suite se, seekhne ke saath (aap khud karenge, tareeqa sikha dunga).
+2. Blind SQLi 12–17 (6 labs) — Burp Suite se ya script se, seekhne ke saath; Lab 11 ho gaya, agla Lab 12 hai.
 3. Har step ke baad ye file GitHub par update hoti rahegi.
