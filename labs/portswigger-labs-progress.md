@@ -1,10 +1,10 @@
-# PortSwigger Labs — Progress Report (15 Nov 2026, updated 20 Nov 2026 ~12:50 PKT)
+# PortSwigger Labs — Progress Report (15 Nov 2026, updated 20 Nov 2026 ~14:29 PKT)
 
-**Total: 42 / 48 labs solved aur verify hue** (SQL Injection 13/18, XSS 29/30). 272-lab plan mein total 42 / 272.
+**Total: 44 / 48 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30). 272-lab plan mein total 44 / 272.
 Kaam 15 Nov ~14:00–18:25 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
 Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal labs, permission wala tareeqa.
 
-## SQL Injection — 13 solved
+## SQL Injection — 15 solved
 
 1. **WHERE clause, hidden data** — `Gifts' OR 1=1--` — saare 20 products mile, jin mein 8 unreleased bhi the. Kyun: `OR 1=1` har row ke liye true ho jata hai.
 2. **Login bypass** — username `administrator'--`, password `x` — admin login ho gaya. Kyun: `--` ke baad password check comment ho jata hai.
@@ -19,6 +19,8 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 11. **XML encoding filter bypass (Lab 18)** — is account par pehle se Solved tha; dobara nahi kiya.
 12. **Blind SQL injection with conditional responses (Lab 11)** — SOLVED 18 Nov ~01:02 PKT. TrackingId cookie mein OR-form payload se 'Welcome back' signal (true/false) se admin password nikala (20 characters, binary search ek ek character), phir login form ka CSRF token le kar administrator login ho gaya, lab Solved. Kyun: OR wali condition true hone par page 'Welcome back' dikhata hai, false par nahi — isi signal se password nikala jata hai. (AND-form kaam nahi karta kyunki TrackingId 'x' exist nahi karta; browser se cookie edit nahi ho saki, is liye script se solve hua — Burp Repeater mein yahi steps haath se hote hain.)
 13. **Blind SQL injection with conditional errors (Lab 12)** — SOLVED 18 Nov ~18:33 PKT. Is lab mein signal error page tha: condition sahi ho to server error page dikhata hai, galat ho to normal page — `CASE WHEN (condition) THEN 1/0 ELSE 'a' END` wala tareeqa. Isi farq se ek ek character kar ke admin ka password nikala, phir login ho gaya, lab Solved. Kyun: `1/0` (zero se divide) sirf tab error deta hai jab condition true ho, is liye error aana = true, normal page = false. (Lab 11 se farq: wahan signal 'Welcome back' tha, yahan error page hai.)
+14. **Blind SQL injection with time delays (Lab 14)** — SOLVED 20 Nov ~14:02 PKT. TrackingId cookie mein PostgreSQL ke `pg_sleep` wala payload lagaya (`CASE WHEN (1=1) THEN pg_sleep(10)` wali shakal) — server ka jawab 10 second late aaya aur home page par lab 'Solved' verify ho gaya; is lab ka goal sirf ye delay paida karna tha. Kyun: `pg_sleep` database ko utni der ke liye sula deta hai, is liye jawab ka late aana hi injection ke chal jane ka saboot hai. (Stacked-query wala mashhoor payload is instance par nahi chala; CASE WHEN wala form chala.)
+15. **Blind SQL injection with time delays and information retrieval (Lab 15)** — SOLVED 20 Nov ~14:29 PKT. TrackingId cookie mein conditional time-delay payload: condition true ho to jawab `pg_sleep` ki wajah se ~3 second late, false ho to foran — isi time ke farq ko signal bana kar admin password nikala (20 characters, binary search ek ek character), phir login form ka CSRF token le kar administrator login ho gaya, lab Solved. Kyun: `pg_sleep` sirf tab chalta hai jab condition true ho, is liye late jawab = true aur foran jawab = false — yehi time signal password ke har character ko pehchan leta hai.
 
 ## Cross-Site Scripting (XSS) — 29 solved
 
@@ -56,10 +58,10 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 ## Kahan ruka aur kyun
 
 - **XSS Lab 29** ("Reflected XSS protected by very strict CSP, with dangling markup attack") — NOT SOLVED. Exploit banaya aur do dafa deliver kiya — victim ne CSRF token bhi bheja — lekin victim ka email change kabhi complete nahi hua, lab "Solved" nahi hua. Ab ye **aap ke ek click** par hai: browser mein Lab 29 ke exploit server tab par khud "Deliver exploit to victim" dabayen. Agar woh bhi na ho, to exploit ka doosra stage (leaked token se email change) dobara banana hoga.
-- **SQLi Labs 13–17 (5 blind labs)** — in mein `TrackingId` cookie badalni parti hai; browser se cookie edit nahi hoti. Lab 11 aur Lab 12 isi tareeqe se 18 Nov ko script se solve ho gaye (Lab 12: error-page signal + CSRF login); baaki 5 Burp Suite se honge ya usi script tareeqe se. Naam: Visible error-based SQL injection (Lab 13 — practical solver nahi chal sakta, sirf concept sikhaya ja sakta hai); Blind SQL injection with time delays (Lab 14 — fresh instance mila lekin har probe request time out ho gayi, retry aap ke go-ahead ka wait kar raha hai); Blind SQL injection with time delays and information retrieval; Blind SQL injection with out-of-band interaction; Blind SQL injection with out-of-band data exfiltration.
+- **SQLi Labs 13–17 (5 blind labs)** — in mein `TrackingId` cookie badalni parti hai; browser se cookie edit nahi hoti. Lab 11 aur Lab 12 isi tareeqe se 18 Nov ko script se solve ho gaye (Lab 12: error-page signal + CSRF login), aur Lab 14 aur Lab 15 bhi 20 Nov ko usi script tareeqe se solve ho gaye (time-delay signal + CSRF login). Baaki 3: Visible error-based SQL injection (Lab 13 — practical solver nahi chal sakta, sirf concept sikhaya ja sakta hai); Blind SQL injection with out-of-band interaction (Lab 16); Blind SQL injection with out-of-band data exfiltration (Lab 17) — ye dono out-of-band wale labs Burp Collaborator mangte hain.
 
 ## Baaki kaam
 
 1. Lab 29 — aap ka ek click (exploit server tab par "Deliver exploit to victim").
-2. Blind SQLi 13–17 (5 labs) — Burp Suite se ya script se, seekhne ke saath; Lab 11 aur Lab 12 ho gaye, agla Lab 13 hai (concept only) aur Lab 14 ka retry go-ahead ka wait kar raha hai.
+2. Blind SQLi mein baaki 3 labs — Lab 13 (concept only), Lab 16 aur Lab 17 (out-of-band, Burp Collaborator ke saath); Lab 11, 12, 14 aur 15 ho gaye.
 3. Har step ke baad ye file GitHub par update hoti rahegi.
