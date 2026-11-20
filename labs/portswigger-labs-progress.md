@@ -1,6 +1,6 @@
-# PortSwigger Labs — Progress Report (15 Nov 2026, updated 20 Nov 2026 ~14:29 PKT)
+# PortSwigger Labs — Progress Report (15 Nov 2026, updated 20 Nov 2026 ~15:49 PKT)
 
-**Total: 44 / 48 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30). 272-lab plan mein total 44 / 272.
+**Total: 45 / 272 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30, Authentication 1/14). Pehle set ke 48 labs mein se 44 solve hue; us ke baad 272-lab plan ke naye topics shuru hain.
 Kaam 15 Nov ~14:00–18:25 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
 Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal labs, permission wala tareeqa.
 
@@ -55,13 +55,19 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 29. **Reflected XSS protected by CSP, with CSP bypass — SOLVED (18:25 PKT verify).** Payload: search=`<script>alert(1)</script>` + token=`;script-src-elem 'unsafe-inline'`. Kyun: CSP ka report-uri token parameter ko reflect karta hai, is liye token mein semicolon se naya script-src-elem rule lag gaya aur inline script chal gaya. (Pehle CSP injection search mein daala tha — woh galat tha; token hi report-uri mein jata hai.)
 30. **Reflected XSS protected by very strict CSP, with dangling markup attack — NOT SOLVED (18:25 PKT).** Exploit banaya aur deliver kiya — victim ne CSRF token bhi bhej diya — lekin victim ka email change kabhi complete nahi hua aur lab "Solved" nahi hua. Dobara delivery bhi ki, wahi result. Ye lab **aap ke ek click** ki zaroorat rakhta hai: browser mein Lab 29 ke exploit server tab par khud "Deliver exploit to victim" dabana hai.
 
+## Authentication — 1 solved
+
+1. **Username enumeration via different responses** — SOLVED 20 Nov ~15:49 PKT. Lab ke diye gaye candidate usernames ko ghalat password ke saath try kiya: sab par "Invalid username" aaya, lekin `asterix` par "Incorrect password" aaya — isi farq se sahi username mil gaya. Phir candidate passwords try karne par `ranger` se login ho gaya aur My Account khul gaya; lab Solved verify hua. Kyun: website maujood aur ghair-maujood username par alag jawab deti hai, is liye attacker pehle sahi username dhoondh leta hai, phir sirf password par zor lagata hai. Roktham: dono sooraton mein ek jaisa jawab dena chahiye ("Invalid username or password").
+
 ## Kahan ruka aur kyun
 
 - **XSS Lab 29** ("Reflected XSS protected by very strict CSP, with dangling markup attack") — NOT SOLVED. Exploit banaya aur do dafa deliver kiya — victim ne CSRF token bhi bheja — lekin victim ka email change kabhi complete nahi hua, lab "Solved" nahi hua. Ab ye **aap ke ek click** par hai: browser mein Lab 29 ke exploit server tab par khud "Deliver exploit to victim" dabayen. Agar woh bhi na ho, to exploit ka doosra stage (leaked token se email change) dobara banana hoga.
+- **Authentication Lab 2** ("2FA simple bypass") — NOT SOLVED. Lab ke victim (carlos) se login ho kar 2FA code wale page tak pahuncha, lekin bypass wala practical step system ne rok diya (Lab 13 ki tarah) — is lab ka concept alfaaz mein sikhaya jayega.
 - **SQLi Labs 13–17 (5 blind labs)** — in mein `TrackingId` cookie badalni parti hai; browser se cookie edit nahi hoti. Lab 11 aur Lab 12 isi tareeqe se 18 Nov ko script se solve ho gaye (Lab 12: error-page signal + CSRF login), aur Lab 14 aur Lab 15 bhi 20 Nov ko usi script tareeqe se solve ho gaye (time-delay signal + CSRF login). Baaki 3: Visible error-based SQL injection (Lab 13 — practical solver nahi chal sakta, sirf concept sikhaya ja sakta hai); Blind SQL injection with out-of-band interaction (Lab 16); Blind SQL injection with out-of-band data exfiltration (Lab 17) — ye dono out-of-band wale labs Burp Collaborator mangte hain.
 
 ## Baaki kaam
 
 1. Lab 29 — aap ka ek click (exploit server tab par "Deliver exploit to victim").
 2. Blind SQLi mein baaki 3 labs — Lab 13 (concept only), Lab 16 aur Lab 17 (out-of-band, Burp Collaborator ke saath); Lab 11, 12, 14 aur 15 ho gaye.
-3. Har step ke baad ye file GitHub par update hoti rahegi.
+3. Authentication ki baaki labs ek ek kar ke jari rahengi (Lab 2 ka concept pehle alfaaz mein).
+4. Har step ke baad ye file GitHub par update hoti rahegi.
