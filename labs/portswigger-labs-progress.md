@@ -1,6 +1,6 @@
-# PortSwigger Labs — Progress Report (15 Nov 2026, updated 20 Nov 2026 ~15:49 PKT)
+# PortSwigger Labs — Progress Report (15 Nov 2026, updated 21 Nov 2026)
 
-**Total: 46 / 272 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30, Authentication 2/14). Pehle set ke 48 labs mein se 44 solve hue; us ke baad 272-lab plan ke naye topics shuru hain.
+**Total: 47 / 272 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30, Authentication 3/14). Pehle set ke 48 labs mein se 44 solve hue; us ke baad 272-lab plan ke naye topics shuru hain.
 Kaam 15 Nov ~14:00–18:25 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
 Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal labs, permission wala tareeqa.
 
@@ -55,10 +55,11 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 29. **Reflected XSS protected by CSP, with CSP bypass — SOLVED (18:25 PKT verify).** Payload: search=`<script>alert(1)</script>` + token=`;script-src-elem 'unsafe-inline'`. Kyun: CSP ka report-uri token parameter ko reflect karta hai, is liye token mein semicolon se naya script-src-elem rule lag gaya aur inline script chal gaya. (Pehle CSP injection search mein daala tha — woh galat tha; token hi report-uri mein jata hai.)
 30. **Reflected XSS protected by very strict CSP, with dangling markup attack — NOT SOLVED (18:25 PKT).** Exploit banaya aur deliver kiya — victim ne CSRF token bhi bhej diya — lekin victim ka email change kabhi complete nahi hua aur lab "Solved" nahi hua. Dobara delivery bhi ki, wahi result. Ye lab **aap ke ek click** ki zaroorat rakhta hai: browser mein Lab 29 ke exploit server tab par khud "Deliver exploit to victim" dabana hai.
 
-## Authentication — 2 solved
+## Authentication — 3 solved
 
 1. **Username enumeration via different responses** — SOLVED 20 Nov ~15:49 PKT. Lab ke diye gaye candidate usernames ko ghalat password ke saath try kiya: sab par "Invalid username" aaya, lekin `asterix` par "Incorrect password" aaya — isi farq se sahi username mil gaya. Phir candidate passwords try karne par `ranger` se login ho gaya aur My Account khul gaya; lab Solved verify hua. Kyun: website maujood aur ghair-maujood username par alag jawab deti hai, is liye attacker pehle sahi username dhoondh leta hai, phir sirf password par zor lagata hai. Roktham: dono sooraton mein ek jaisa jawab dena chahiye ("Invalid username or password").
 2. **Username enumeration via subtly different responses** — SOLVED 20 Nov 2026. Lab ke diye gaye candidate usernames ko ek probe password ke saath try kiya: sab ke error message bilkul ek jaisay lagtay thay, lekin sahi user ke jawab mein aakhir mein period (.) ghayab tha — us ki jagah ek trailing space tha. Isi bareek farq se sahi username mil gaya. Phir us user ke liye candidate passwords try karne par login ho gaya aur lab Solved verify hua. Kyun: jawab mein chhota sa farq (period ki jagah space) bhi bata deta hai ke ye username asal mein maujood hai, is liye attacker pehle sahi username pakar leta hai aur phir sirf password par zor lagata hai. Roktham: maujood aur ghair-maujood username par har harf tak bilkul ek jaisa jawab dena chahiye.
+3. **Broken brute-force protection, IP block** — SOLVED 21 Nov 2026. Lab ke victim account `carlos` par ghalat login koshishain joron (pairs) mein bheji gayin; har jore ke baad `wiener:peter` se ek sahi login kar diya gaya, jis se IP par based failed-attempt counter zero ho jata tha aur IP block kabhi laga hi nahi. Isi tareeqe se saare candidate passwords try ho gaye aur `12345678` se carlos ka login ho gaya; lab Solved verify hua. Kyun: Har 2 ghalat koshishon ke baad wiener ka sahi login IP wala counter zero kar deta tha, is liye block lage baghair carlos ke saare password try ho gaye. Roktham: failed-attempt counter kisi sahi login se reset nahi hona chahiye — block account par based hona chahiye, sirf IP par nahi, aur har account ke liye alag limit honi chahiye.
 
 ## Kahan ruka aur kyun
 
