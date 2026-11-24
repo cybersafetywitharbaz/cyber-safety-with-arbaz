@@ -1,6 +1,6 @@
 # PortSwigger Labs — Progress Report (15 Nov 2026, updated 24 Nov 2026)
 
-**Total: 54 / 272 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30, Authentication 3/14, Path Traversal 5/6, Business Logic 2). Pehle set ke 48 labs mein se 44 solve hue; us ke baad 272-lab plan ke naye topics shuru hain.
+**Total: 56 / 272 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30, Authentication 3/14, Path Traversal 5/6, Business Logic 4). Pehle set ke 48 labs mein se 44 solve hue; us ke baad 272-lab plan ke naye topics shuru hain.
 Kaam 15 Nov ~14:00–18:25 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
 Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal labs, permission wala tareeqa.
 
@@ -75,10 +75,14 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 
 **Concept (Roman Urdu):** OS Command Injection tab hoti hai jab website user ka input seedha server ke operating system command mein jor deti hai. Masalan product ka stock check karne ke liye server `stockreport.pl 381` jaisi command chalata ho — agar attacker `381; whoami` bhej de to `;` ke baad wala hissa alag command ban kar chal jata hai aur us ka output page par aa jata hai. Blind wale labs mein output nazar nahi aata: wahan `sleep 10` jaisi command se time delay paida kar ke pata chalaya jata hai ke injection chali ya nahi, ya output ko kisi file mein redirect kar ke parha jata hai. Out-of-band wale labs (Lab 4–5) mein Burp Collaborator chahiye hota hai — server se bahar kisi aur jagah signal bheja jata hai. Roktham: user input ko kabhi seedha OS command mein na jorein; fixed commands aur allowlist use karein, aur input ko strictly validate karein.
 
-## Business Logic — 2 solved
+## Business Logic — 4 solved
 
 1. **Excessive trust in client-side controls** — SOLVED 24 Nov 2026. Lab ki shop mein `wiener:peter` se login kiya (store credit $100.00), Lightweight "l33t" Leather Jacket ($1337.00, productId=1) cart mein dala — lekin `POST /cart` request mein chhupa hua `price` parameter (cents mein 133700) client ki taraf se aata hai aur server bina check kiye maan leta hai; wahi POST `price=100` ($1.00) ke saath bheja to cart ka total $1.00 ho gaya, phir cart ke csrf token ke saath checkout POST kiya aur lab ne "Congratulations, you solved the lab!" dikhaya. Kyun: server ne client ki bheji hui price par bharosa kar liya — hidden field ya client-side validation security nahi hai. Roktham: price aur roles hamesha server-side database se check karein; har parameter ko server par validate karein.
 2. **High-level logic vulnerability** — SOLVED 24 Nov 2026. Lab ki shop mein `wiener:peter` se login kiya (store credit $100.00), cart mein Lightweight "l33t" Leather Jacket ($1337.00, productId=1) aur Eco Boat ($1.83, productId=16) dala — total $1338.83 ho gaya; phir `POST /cart` mein Eco Boat ki quantity `-700` bhej di (negative quantity), Eco Boat wali line taqreeban -$1279 ho gayi aur cart ka total $57.83 reh gaya, phir cart ke csrf token ke saath checkout POST kiya aur lab ne "Congratulations, you solved the lab!" dikhaya. Kyun: server ne quantity ko check kiye baghair maan liya — negative quantity asal khareed nahi hai, lekin server ne us se total ghata diya. Roktham: quantity hamesha server-side validate karein (quantity > 0 honi chahiye) aur total server-side prices se dobara calculate karein; client ki bheji hui kisi bhi value par bharosa na karein.
+
+3. **Inconsistent security controls** — SOLVED 24 Nov 2026. Exploit server wali email se `arbaz1` user register kiya, Email client se confirm kiya, phir email badal kar `arbaz@dontwannacry.com` kar di — us ke baad Admin panel nazar aane laga aur us se user `carlos` delete kar diya; lab Solved verify hua. Kyun: admin honay ka check user ke email domain par tha, aur email badalne par naye address ki verification hoti hi nahi thi — is liye koi bhi apna email badal kar admin ban sakta tha. Roktham: admin rights sirf server-side explicitly assign karein, email domain par authorization na rakhein, aur naya email verify kiye baghair effective na hone dein.
+
+4. **Flawed enforcement of business rules** — SOLVED 24 Nov 2026. `wiener:peter` se login kiya, newsletter signup (arbaz@example.com) se coupon `SIGNUP30` liya, jacket cart mein dala, phir coupons `NEWCUST5` (-$5.00) aur `SIGNUP30` (-$401.10) ko baari baari 4-4 dafa lagaya — har dafa poori discount dobara kat gayi aur total $0.00 ho gaya — phir order place kiya aur lab Solved verify hua. Kyun: coupon ka rule sirf UI mein tha, server par nahi — server ne ye check hi nahi kiya ke coupon is order par pehle lag chuka hai. Roktham: coupon rules server-side enforce karein (ek order par ek coupon ya clear limit), aur total ko $0.00 se neeche na jaane dein.
 
 ## Kahan ruka aur kyun
 
@@ -94,5 +98,5 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 1. Lab 29 — aap ka ek click (exploit server tab par "Deliver exploit to victim").
 2. Blind SQLi mein baaki 3 labs — Lab 13 (concept only), Lab 16 aur Lab 17 (out-of-band, Burp Collaborator ke saath); Lab 11, 12, 14 aur 15 ho gaye.
 3. Authentication ki baaki labs ek ek kar ke jari rahengi (Lab 2 aur Lab 3 ke concepts pehle alfaaz mein).
-4. Business Logic Lab 1 aur Lab 2 solve ho gaye (24 Nov 2026); Business Logic ki baaki labs ek ek kar ke jari rahengi — phir Information Disclosure, Access Control, aur aage recorded continuation order mein.
+4. Business Logic Labs 1–4 solve ho gaye (24 Nov 2026); agla Lab 5 'Low-level logic flaw' hai — baaki labs ek ek kar ke jari rahengi, phir Information Disclosure, Access Control, aur aage recorded continuation order mein.
 5. Har step ke baad ye file GitHub par update hoti rahegi.
