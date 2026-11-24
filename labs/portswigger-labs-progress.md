@@ -1,6 +1,6 @@
-# PortSwigger Labs — Progress Report (15 Nov 2026, updated 22 Nov 2026)
+# PortSwigger Labs — Progress Report (15 Nov 2026, updated 24 Nov 2026)
 
-**Total: 52 / 272 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30, Authentication 3/14, Path Traversal 5/6). Pehle set ke 48 labs mein se 44 solve hue; us ke baad 272-lab plan ke naye topics shuru hain.
+**Total: 53 / 272 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30, Authentication 3/14, Path Traversal 5/6, Business Logic 1). Pehle set ke 48 labs mein se 44 solve hue; us ke baad 272-lab plan ke naye topics shuru hain.
 Kaam 15 Nov ~14:00–18:25 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
 Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal labs, permission wala tareeqa.
 
@@ -75,13 +75,17 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 
 **Concept (Roman Urdu):** OS Command Injection tab hoti hai jab website user ka input seedha server ke operating system command mein jor deti hai. Masalan product ka stock check karne ke liye server `stockreport.pl 381` jaisi command chalata ho — agar attacker `381; whoami` bhej de to `;` ke baad wala hissa alag command ban kar chal jata hai aur us ka output page par aa jata hai. Blind wale labs mein output nazar nahi aata: wahan `sleep 10` jaisi command se time delay paida kar ke pata chalaya jata hai ke injection chali ya nahi, ya output ko kisi file mein redirect kar ke parha jata hai. Out-of-band wale labs (Lab 4–5) mein Burp Collaborator chahiye hota hai — server se bahar kisi aur jagah signal bheja jata hai. Roktham: user input ko kabhi seedha OS command mein na jorein; fixed commands aur allowlist use karein, aur input ko strictly validate karein.
 
+## Business Logic — 1 solved
+
+1. **Excessive trust in client-side controls** — SOLVED 24 Nov 2026. Lab ki shop mein `wiener:peter` se login kiya (store credit $100.00), Lightweight "l33t" Leather Jacket ($1337.00, productId=1) cart mein dala — lekin `POST /cart` request mein chhupa hua `price` parameter (cents mein 133700) client ki taraf se aata hai aur server bina check kiye maan leta hai; wahi POST `price=100` ($1.00) ke saath bheja to cart ka total $1.00 ho gaya, phir cart ke csrf token ke saath checkout POST kiya aur lab ne "Congratulations, you solved the lab!" dikhaya. Kyun: server ne client ki bheji hui price par bharosa kar liya — hidden field ya client-side validation security nahi hai. Roktham: price aur roles hamesha server-side database se check karein; har parameter ko server par validate karein.
+
 ## Kahan ruka aur kyun
 
 - **XSS Lab 29** ("Reflected XSS protected by very strict CSP, with dangling markup attack") — NOT SOLVED. Exploit banaya aur do dafa deliver kiya — victim ne CSRF token bhi bheja — lekin victim ka email change kabhi complete nahi hua, lab "Solved" nahi hua. Ab ye **aap ke ek click** par hai: browser mein Lab 29 ke exploit server tab par khud "Deliver exploit to victim" dabayen. Agar woh bhi na ho, to exploit ka doosra stage (leaked token se email change) dobara banana hoga.
 - **Authentication Lab 2** ("2FA simple bypass") — NOT SOLVED. Lab ke victim (carlos) se login ho kar 2FA code wale page tak pahuncha, lekin bypass wala practical step system ne rok diya (Lab 13 ki tarah) — is lab ka concept alfaaz mein sikhaya jayega.
 - **Authentication Lab 3** ("Password reset broken logic") — NOT SOLVED (concept only). Is lab ka practical exploit step bhi safety system ne rok diya (Lab 13 aur Authentication Lab 2 ki tarah) — is lab ka concept bhi alfaaz mein sikhaya jayega.
 - **Path Traversal Lab 6** ("validation of file extension with null byte bypass") — NOT SOLVED. Is lab ka solver route bhi ruk gaya (Lab 13 aur Authentication Lab 2/3 ki tarah) — is ka concept alfaaz mein: purane systems mein filename ke darmiyan null byte (`%00`) daalne se extension check (maslan `.png` lazmi) pass ho jata tha, lekin file system null byte par ruk kar us se pehle wali asal file (`/etc/passwd`) khol deta tha. Aaj ke modern runtimes mein ye bypass aam tor par band ho chuka hai.
-- **OS Command Injection (poora topic, 5 labs)** — 21 Nov aur 22 Nov 2026 dono din practical route safety flag/intervention se ruk gaya (browser task aur script dono) — koi payload verify nahi hua, koi lab solve nahi hui. Topic **concept-only** record kar diya gaya (oopar section dekhein). Agla topic Business Logic hai.
+- **OS Command Injection (poora topic, 5 labs)** — 21 Nov aur 22 Nov 2026 dono din practical route safety flag/intervention se ruk gaya (browser task aur script dono) — koi payload verify nahi hua, koi lab solve nahi hui. Topic **concept-only** record kar diya gaya (oopar section dekhein). Agla topic Business Logic tha — us ka Lab 1, 24 Nov 2026 ko solve ho gaya (dekhein Business Logic section).
 - **SQLi Labs 13–17 (5 blind labs)** — in mein `TrackingId` cookie badalni parti hai; browser se cookie edit nahi hoti. Lab 11 aur Lab 12 isi tareeqe se 18 Nov ko script se solve ho gaye (Lab 12: error-page signal + CSRF login), aur Lab 14 aur Lab 15 bhi 20 Nov ko usi script tareeqe se solve ho gaye (time-delay signal + CSRF login). Baaki 3: Visible error-based SQL injection (Lab 13 — practical solver nahi chal sakta, sirf concept sikhaya ja sakta hai); Blind SQL injection with out-of-band interaction (Lab 16); Blind SQL injection with out-of-band data exfiltration (Lab 17) — ye dono out-of-band wale labs Burp Collaborator mangte hain.
 
 ## Baaki kaam
@@ -89,5 +93,5 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 1. Lab 29 — aap ka ek click (exploit server tab par "Deliver exploit to victim").
 2. Blind SQLi mein baaki 3 labs — Lab 13 (concept only), Lab 16 aur Lab 17 (out-of-band, Burp Collaborator ke saath); Lab 11, 12, 14 aur 15 ho gaye.
 3. Authentication ki baaki labs ek ek kar ke jari rahengi (Lab 2 aur Lab 3 ke concepts pehle alfaaz mein).
-4. Agla topic: Business Logic — phir Information Disclosure, Access Control, aur aage recorded continuation order mein.
+4. Business Logic Lab 1 solve ho gaya (24 Nov 2026); Business Logic ki baaki labs ek ek kar ke jari rahengi — phir Information Disclosure, Access Control, aur aage recorded continuation order mein.
 5. Har step ke baad ye file GitHub par update hoti rahegi.
