@@ -4,7 +4,7 @@
 **Profile:** arbazchuahan (joined April 2026)
 **Level:** 34 — Silver league — Top 35%
 **Questions answered:** 249 — **Streak:** 1 day
-**Rooms completed at 100%:** 37
+**Rooms completed at 100%:** 39
 
 ## Rooms completed (100%)
 
@@ -57,6 +57,11 @@
 - **Blue** (free room) — 0%. Needs AttackBox + lab machine together; free AttackBox is limited to 1 hour a day. Tested 24 Nov ~21:23, lab machine terminated.
 - **OWASP Top 10 2025: Application Design Flaws** and **Networking Concepts Task 7** — need AttackBox + lab machine together (blocked on Free).
 - **Premium-only rooms** (tested and skipped, not attempted): Linux Fundamentals Pt 2, Computer Types, What is Networking?, Client-Server Basics, Virtualisation Basics, Windows Fundamentals 3, Public Key Cryptography Basics, Hashing Basics, Digital Forensics Fundamentals, JavaScript Essentials, SQL Fundamentals.
+
+### 2 more rooms (25 November 2026, round 3)
+- **The Building Blocks of AI** (AI Security path) — 100%, 8 tasks, 104 points, NEURON-1 practical 100% accuracy
+- **Tutorial** — 100%, 1 task (free AttackBox + lab machine, flag{connection_verified}; both machines terminated after)
+- NOTE: AI Security Threats started (26%) but abandoned — the room's in-room agent exercise kept tripping a safety check, so it was left unfinished rather than forced.
 
 ### 2 more rooms (25 November 2026, round 2)
 - **AI Security Path Ticketing Event** — 100% (info room, 1 task)
