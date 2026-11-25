@@ -1,10 +1,10 @@
-# TryHackMe — Progress (checked 24 November 2026)
+# TryHackMe — Progress (updated 25 November 2026)
 
 **Platform:** TryHackMe (free rooms only — no Premium)
 **Profile:** arbazchuahan (joined April 2026)
 **Level:** 34 — Silver league — Top 35%
 **Questions answered:** 249 — **Streak:** 1 day
-**Rooms completed at 100%:** 34
+**Rooms completed at 100%:** 36
 
 ## Rooms completed (100%)
 
@@ -58,8 +58,12 @@
 - **OWASP Top 10 2025: Application Design Flaws** and **Networking Concepts Task 7** — need AttackBox + lab machine together (blocked on Free).
 - **Premium-only rooms** (tested and skipped, not attempted): Linux Fundamentals Pt 2, Computer Types, What is Networking?, Client-Server Basics, Virtualisation Basics, Windows Fundamentals 3, Public Key Cryptography Basics, Hashing Basics, Digital Forensics Fundamentals, JavaScript Essentials, SQL Fundamentals.
 
+### 2 more rooms (25 November 2026)
+- **SOC Role in Blue Team** (SOC Level 1 path) — 100%, 6 tasks, 56 points. SOC roles, CISO, Blue Team, CIRT, MSSP, SOC L1/L2 duties; final challenge matching analysts to incidents. Flag: THM{trysecureme_is_secured!}
+- **Defensive Security Intro** (Jr Penetration Tester path — a different room from the earlier same-named one) — 100%. FakeBank attack investigation: source IP 32.122.195.63, malicious URL https://fakebank.thm/admin, Block/Slow/Protect deployed. Flag: THM{threat_stopped}
+
 ## Where things stand
-Free rooms in the Pre Security + Cyber Security 101 paths are **exhausted** (verified 24 Nov ~22:58 PKT) — every remaining room in those paths is Premium-only or needs AttackBox + lab machine together. Next step needs a choice: try other free paths (for example SOC Level 1, Web Fundamentals) or stop here. All lab machines terminated; progress saved.
+Free rooms in the Pre Security + Cyber Security 101 paths are **exhausted** (verified 24 Nov ~22:58 PKT) — every remaining room in those paths is Premium-only or needs AttackBox + lab machine together. SOC Level 1 path moved from 2% to 3% (25 Nov). Next rooms checked and Premium-only: Humans as Attack Vectors (SOC Level 1), Putting it all together (Web Fundamentals), Dive Into Pentesting (Jr Penetration Tester). More free rooms are being tried in other paths (Jr Penetration Tester, Security Engineer).
 
 ---
 
