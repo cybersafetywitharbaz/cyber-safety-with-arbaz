@@ -4,7 +4,7 @@
 **Profile:** arbazchuahan (joined April 2026)
 **Level:** 34 — Silver league — Top 35%
 **Questions answered:** 249 — **Streak:** 1 day
-**Rooms completed at 100%:** 36
+**Rooms completed at 100%:** 37
 
 ## Rooms completed (100%)
 
@@ -57,6 +57,10 @@
 - **Blue** (free room) — 0%. Needs AttackBox + lab machine together; free AttackBox is limited to 1 hour a day. Tested 24 Nov ~21:23, lab machine terminated.
 - **OWASP Top 10 2025: Application Design Flaws** and **Networking Concepts Task 7** — need AttackBox + lab machine together (blocked on Free).
 - **Premium-only rooms** (tested and skipped, not attempted): Linux Fundamentals Pt 2, Computer Types, What is Networking?, Client-Server Basics, Virtualisation Basics, Windows Fundamentals 3, Public Key Cryptography Basics, Hashing Basics, Digital Forensics Fundamentals, JavaScript Essentials, SQL Fundamentals.
+
+### 2 more rooms (25 November 2026, round 2)
+- **AI Security Path Ticketing Event** — 100% (info room, 1 task)
+- **Security Engineer Intro** (Security Engineer path) — 100%, 7 tasks, badge earned: **Introduction to Security Engineering**. Included an in-browser VAPT/audit simulation (flag THM{S3CUR1TY_3NG1N33R5_R0CK})
 
 ### 2 more rooms (25 November 2026)
 - **SOC Role in Blue Team** (SOC Level 1 path) — 100%, 6 tasks, 56 points. SOC roles, CISO, Blue Team, CIRT, MSSP, SOC L1/L2 duties; final challenge matching analysts to incidents. Flag: THM{trysecureme_is_secured!}
