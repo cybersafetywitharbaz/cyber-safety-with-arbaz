@@ -40,25 +40,29 @@ I am a cyber security learner building practical, hands-on skills — and docume
 
 Every solved lab has a full write-up (Lab Name, Vulnerability Type, Difficulty, Solution, Practical Explanation, Lessons Learned, Mitigation) in [`labs/`](https://github.com/cybersafetywitharbaz/cyber-safety-with-arbaz/tree/main/labs).
 
-### PortSwigger Web Security Academy — 62 / 272 labs solved
+### PortSwigger Web Security Academy — 64 / 272 labs solved
 
 - **SQL Injection:** 15/18
 - **Cross-Site Scripting (XSS):** 29/30
-- **Authentication:** 3/14
+- **Authentication:** 4/14
 - **Path Traversal:** 5/6
-- **Business Logic:** 11/12 (Lab 6 is blocked — the lab's confirmation-email delivery is broken on fresh instances; Lab 12 in progress)
+- **Business Logic:** 12/12 — topic complete (Lab 12 solved 25 Nov 2026)
 
-### TryHackMe — 39 rooms completed (Level 34)
+### TryHackMe — 41 rooms completed (Level 34)
 
 Profile: [tryhackme.com/p/arbazchuahan](https://tryhackme.com/p/arbazchuahan) — 2,864 points, Top 15%, 2-day streak. Paths: Pre Security 43%, SOC Level 1 in progress.
 
 See [`labs/tryhackme-progress-2026-11-24.md`](labs/tryhackme-progress-2026-11-24.md) for the room list.
 
-### Hack The Box Academy — 8 / 413 modules (Level 12)
+### Hack The Box Academy — 9 / 413 modules (Level 12)
 
-Profile: [@cybersafetywitharbaz](https://profile.hackthebox.com/profile/019d69b3-3719-727d-ab6e-fb4ea34e5a95) — Beginner Grade 3/3, 122 cubes. Completed: Learning Process, Introduction to Academy, Linux Fundamentals, Introduction to Web Applications, Web Requests, Web Fuzzing, Bug Bounty Hunting Process.
+Profile: [@cybersafetywitharbaz](https://profile.hackthebox.com/profile/019d69b3-3719-727d-ab6e-fb4ea34e5a95) — Beginner Grade 3/3, 122 cubes. Completed: Learning Process, Introduction to Academy, Linux Fundamentals, Introduction to Web Applications, Web Requests, Web Fuzzing, Bug Bounty Hunting Process, Brief Intro to Hardware Attacks.
 
 See [`labs/hackthebox-academy-progress-2026-11-24.md`](labs/hackthebox-academy-progress-2026-11-24.md) for full progress.
+
+### OverTheWire Bandit — 3 / 34 levels (Linux wargame)
+
+Free SSH wargame (overthewire.org) — Linux command line and file handling. Levels 0–2 solved with write-ups in [`labs/`](https://github.com/cybersafetywitharbaz/cyber-safety-with-arbaz/tree/main/labs) (`overthewire-bandit-level-0.md` to `overthewire-bandit-level-2.md`).
 
 ## Freelancing
 

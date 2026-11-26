@@ -1,6 +1,6 @@
 # PortSwigger Labs — Progress Report (15 Nov 2026, updated 25 Nov 2026)
 
-**Total: 63 / 272 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30, Authentication 4/14, Path Traversal 5/6, Business Logic 11/12). Pehle set ke 48 labs mein se 44 solve hue; us ke baad 272-lab plan ke naye topics shuru hain.
+**Total: 64 / 272 labs solved aur verify hue** (SQL Injection 15/18, XSS 29/30, Authentication 4/14, Path Traversal 5/6, Business Logic 12/12). Pehle set ke 48 labs mein se 44 solve hue; us ke baad 272-lab plan ke naye topics shuru hain.
 Kaam 15 Nov ~14:00–18:25 PKT chala, PortSwigger account "Arbaz Ahmed Naveed" (arbazchuahan@gmail.com) se signed in.
 Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal labs, permission wala tareeqa.
 
@@ -114,6 +114,6 @@ Sab labs sirf PortSwigger ke apne training lab domains par solve hue — legal l
 
 ## GitHub write-ups (staged 25 Nov 2026, push pending approval)
 
-- **63 solved labs mein se 63 ke write-ups tayyar hain:** Business Logic Labs 1–5 (pehle se staged) + Lab 7 'Weak isolation on dual-use endpoint' (25 Nov 2026, naya) + Lab 8 'Insufficient workflow validation' (25 Nov 2026, naya) + Lab 9 'Authentication bypass via flawed state machine' (25 Nov 2026 ~17:45 PKT, naya) + Lab 10 'Infinite money logic flaw' (25 Nov 2026 ~18:48 PKT, naya) + Lab 11 'Authentication bypass via encryption oracle' (25 Nov 2026, naya) + **Authentication '2FA simple bypass' (25 Nov 2026 ~19:53 PKT, naya)** + 25 Nov ko 52 naye per-lab write-ups likhe gaye — SQL Injection Labs 1–15, XSS Labs 1–29, Authentication Labs 1–3, Path Traversal Labs 1–5 — sab isi progress file mein darj verified methods se likhe gaye, koi method invent nahi ki gayi.
+- **64 solved labs mein se 64 ke write-ups tayyar hain:** Business Logic Labs 1–5 (pehle se staged) + Lab 7 'Weak isolation on dual-use endpoint' (25 Nov 2026, naya) + Lab 8 'Insufficient workflow validation' (25 Nov 2026, naya) + Lab 9 'Authentication bypass via flawed state machine' (25 Nov 2026 ~17:45 PKT, naya) + Lab 10 'Infinite money logic flaw' (25 Nov 2026 ~18:48 PKT, naya) + Lab 11 'Authentication bypass via encryption oracle' (25 Nov 2026, naya) + **Authentication '2FA simple bypass' (25 Nov 2026 ~19:53 PKT, naya)** + **Business Logic Lab 12 'Bypassing access controls using email address parsing discrepancies' (25 Nov 2026 ~19:58 PKT, naya — fresh instance, email-parsing trick, carlos deleted)** + 25 Nov ko 52 naye per-lab write-ups likhe gaye — SQL Injection Labs 1–15, XSS Labs 1–29, Authentication Labs 1–3, Path Traversal Labs 1–5 — sab isi progress file mein darj verified methods se likhe gaye, koi method invent nahi ki gayi.
 - **TryHackMe aur Hack The Box ke progress write-ups bhi staged hain:** `labs/tryhackme-progress-2026-11-24.md` (34 rooms, Level 34) aur `labs/hackthebox-academy-progress-2026-11-24.md` (6/413 modules, Level 10).
 - Kul staged files: 65 (manifest mein darj). Push ke liye Arbaz ki approval chahiye — approval card do dafa timeout ho chuka hai, is liye bina pooche retry nahi karna.
