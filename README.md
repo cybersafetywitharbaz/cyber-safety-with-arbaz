@@ -26,11 +26,12 @@ I am a cyber security learner building practical, hands-on skills — and docume
 | Network Defense | Final Exam **94%** | Nov 2026 |
 | Endpoint Security | Final Exam **89%**, class grade 91% — certificate + Credly badge claimed | Nov 2026 |
 | Python Essentials 1 | Final Exam **89%**, class grade **97.8%** — certificate + Credly badge arrived 26 Nov 2026 | Nov 2026 |
+| Python Essentials 2 | Final Exam **93%** — certificate + Credly badge claimed 27 Nov 2026 | Nov 2026 |
 | Junior Cybersecurity Analyst Career Path | Completed | Nov 2026 |
 | Networking Basics | Completed | Nov 2026 |
 | Introduction to Cybersecurity | Completed | Sep 2026 |
 
-**Currently enrolled (free, self-paced):** Linux Essentials, The Cybersecurity Landscape.
+**Currently enrolled (free, self-paced):** Linux Essentials, The Cybersecurity Landscape, Understanding Threats and Attacks (enrolment in progress).
 
 ## Other Certificates
 
@@ -42,15 +43,20 @@ I am a cyber security learner building practical, hands-on skills — and docume
 
 Every solved lab has a full write-up (Lab Name, Vulnerability Type, Difficulty, Solution, Practical Explanation, Lessons Learned, Mitigation) in [`labs/`](https://github.com/cybersafetywitharbaz/cyber-safety-with-arbaz/tree/main/labs).
 
-### PortSwigger Web Security Academy — 66 / 274 labs solved
+### PortSwigger Web Security Academy — 97 / 274 labs solved
 
 - **SQL Injection:** 15/18
 - **Cross-Site Scripting (XSS):** 29/30
 - **Authentication:** 6/14
 - **Path Traversal:** 5/6
 - **Business Logic:** 12/12 — topic complete (Lab 12 solved 25 Nov 2026)
+- **Information Disclosure:** 1/5 solved + 3 answers found (submit in your own browser)
+- **Access Control:** 10/13 + 3 answers found (submit in your own browser)
+- **CSRF:** 11/11 — topic complete
+- **SSRF:** 5/7
+- **XXE:** 4/9 + 3 answers found (submit in your own browser)
 
-### TryHackMe — 41 rooms completed (Level 34)
+### TryHackMe — 42 rooms completed (Level 34)
 
 Profile: [tryhackme.com/p/arbazchuahan](https://tryhackme.com/p/arbazchuahan) — 2,864 points, Top 15%, 2-day streak. Paths: Pre Security 43%, SOC Level 1 in progress.
 
