@@ -55,4 +55,4 @@ Note: Module 2 showed 95% in the course outline (Section 2.4 quiz incomplete); t
 
 ## Certificate / Badge
 
-Course completion certificate / badge claim status: not yet checked.
+Course completion certificate / badge claim status: **certificate DOWNLOADED 26 Nov 2026 — issued Nov 26, 2026, 30 hours, Networking Academy (PDF saved: ~/workspace/your_files/certificates/python-essentials-1-certificate.pdf). Credly badge ready to claim at https://www.credly.com/badges/65540290-89d1-4c3a-9934-89acec550dbb/accept (his manual step). PCEP 20% discount code 9D632695788A, expires ~26 Dec 2026 — do NOT buy without his explicit approval.**
