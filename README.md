@@ -43,7 +43,7 @@ I am a cyber security learner building practical, hands-on skills — and docume
 
 Every solved lab has a full write-up (Lab Name, Vulnerability Type, Difficulty, Solution, Practical Explanation, Lessons Learned, Mitigation) in [`labs/`](https://github.com/cybersafetywitharbaz/cyber-safety-with-arbaz/tree/main/labs).
 
-### PortSwigger Web Security Academy — 97 / 274 labs solved
+### PortSwigger Web Security Academy — 105 / 274 labs solved
 
 - **SQL Injection:** 15/18
 - **Cross-Site Scripting (XSS):** 29/30
@@ -55,6 +55,8 @@ Every solved lab has a full write-up (Lab Name, Vulnerability Type, Difficulty, 
 - **CSRF:** 11/11 — topic complete
 - **SSRF:** 5/7
 - **XXE:** 4/9 + 3 answers found (submit in your own browser)
+- **SSTI:** 5/7 + 2 answers found (submit in your own browser)
+- **OS Command Injection:** 3/5
 
 ### TryHackMe — 42 rooms completed (Level 34)
 
