@@ -183,3 +183,7 @@ Poora topic ek hi shaam mein solve hua (instances 21:03 launch, solver `~/worksp
 7. **Blind SSRF with Shellshock exploitation** — NOT SOLVED. Lab 3 ki tarah — koi exploit server nahi, Burp Collaborator chahiye; aakhir mein OS username Submit-solution prompt mein type karna hai (woh Arbaz ka step hai, jaise Info Disclosure Labs 1–3).
 
 **SSRF total: 5/7. PortSwigger total ab 93/274.** Agla topic roadmap order mein XXE hai.
+
+## XXE — 0/9 solved (27 Nov 2026, preparation only)
+
+No lab solved in this run — launching instances needs Arbaz's signed-in PortSwigger session (browser task), and yesterday's instances are dead (Lab 1: connection failed, Lab 6: 504). Reference file prepared: `~/workspace/your_files/portswigger-xxe-labs.md` — all 9 lab pages + official solutions fetched from the sitemap (Labs 1–2 APPRENTICE, 3–9 PRACTITIONER). Curl-doable once instances launch, in order: Lab 1 (retrieve /etc/passwd), Lab 2 (SSRF to 169.254.169.254 — answer only, SecretAccessKey goes to Arbaz for Submit), Lab 6 (XInclude, form POST), Lab 9 (repurposed local DTD, error message), Lab 8 (malicious external DTD on exploit server, error message), Lab 5 (SVG file upload — answer only, hostname goes to Arbaz for Submit), Lab 7 (malicious external DTD — try exploit-server access-log exfil first, else Collaborator). Labs 3 and 4 (blind OOB) need Burp Collaborator on Arbaz's own computer — do not attempt by curl. Expected outcome if all curl-able labs solve: 93/274 → 98/274 (Labs 1, 6, 8, 9) + Lab 2/5 answers.

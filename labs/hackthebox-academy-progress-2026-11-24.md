@@ -32,8 +32,8 @@ All completed modules are free Tier 0. No purchases made, no cubes spent.
 
 ## In progress
 - **Brief Intro to Hardware Attacks (Mini, Tier 0) — COMPLETED 25 Nov 2026 (100%, 8/8 sections)** — answers: BlueSmacking, 8 BlueBorne zero-days, Timing Attacks (side-channel), speculative execution (Spectre), out-of-order execution (Meltdown). Badge earned: **Humanoid**. No PwnBox needed, 122 cubes unchanged.
-- **Introduction to Bash Scripting — 90%** — only one question left: Flow Control – Loops — encode var=`9M` 28 times in base64; the salt is the 28th hash's length. 20 computed values were all rejected — do NOT re-guess; the exact PwnBox shell result is needed.
-- **JavaScript Deobfuscation — 45.45% (5/11)** — all theory sections complete (Introduction, Code Obfuscation, Basic Obfuscation, Advanced Obfuscation, Code Analysis). Remaining sections are interactive only (Source Code, Deobfuscation, HTTP Requests, Decoding, Skills Assessment x2) — need PwnBox + target.
+- **Introduction to Bash Scripting — 90%** — last question SOLVED 27 Nov 2026: Flow Control – Loops salt = **34071**, verified by running the module's exact exercise script in the shell (decrypt → flag `HTBL00p5r0x`; negative control: 34070 and 34072 both give 'bad decrypt'). Why the 26+ earlier values failed: the script computes salt with `echo $var | wc -c` (= ${#var} + 1, the newline echo adds) — 34070 is wrong, 34071 is right. **Answer submission still pending — needs a signed-in browser session on HTB Academy.** Write-up: `labs/hackthebox-bash-scripting-flow-control-loops.md`. Once submitted, module → 100% (10/413).
+- **JavaScript Deobfuscation — 90.91% (10/11)** — Q1–Q3 solved (api.min.js; HTB{j4v45cr1p7_3num3r4710n_15_k3y}; HTB{n3v3r_run_0bfu5c473d_c0d3!}). **Q4/Q5 remain — the key is PER-SPAWN: fetch from the live target via PwnBox, hex-decode, POST key=DECODED_KEY to /keys.php.** Needs a fresh PwnBox spawn (daily reset 27 Nov).
 - **SQL Injection Fundamentals — 29.41% (5/17)** — theory done (Intro to SQL Injections, Mitigating SQL Injection). Remaining MySQL, interactive SQLi, Exploitation and Skills Assessment sections need PwnBox.
 - **File Inclusion — 9.09% (1/11)** — Introduction (the only theory section) complete. 10 interactive sections need PwnBox.
 - **Network Enum With Nmap — 25%** — in progress.
@@ -41,11 +41,11 @@ All completed modules are free Tier 0. No purchases made, no cubes spent.
 ## Blockers (as of 25 November 2026)
 - Free PwnBox: 1 spawn per day. The daily spawn was used up on 25 Nov (0/1 left) — interactive sections resume after the next daily reset (26 Nov).
 - HTB Academy rate-limited / Cloudflare-challenged the cloud browser on 24–25 Nov ("Take it Slow", Turnstile). The device browser (own Chrome, Google sign-in) reaches the dashboard — it loads blank at first, then renders after ~30s waits.
-- Bash Scripting salt question: 20 computed candidates rejected — must be computed inside a PwnBox shell, not guessed.
+- Bash Scripting salt question: SOLVED 27 Nov 2026 (34071, decrypt-verified) — only the answer submission is pending (browser sign-in).
 
 ## Next (free Tier 0, in order)
 1. Spawn PwnBox (26 Nov) — Bash Scripting Loops salt, then the interactive sections of JavaScript Deobfuscation, SQL Injection Fundamentals, File Inclusion.
-2. Bash Scripting 90% (salt question — needs PwnBox shell; resume 26 Nov after daily spawn reset).
+2. Bash Scripting — submit the verified salt (34071) via browser, then the interactive sections of JavaScript Deobfuscation (Q4/Q5, per-spawn key), SQL Injection Fundamentals, File Inclusion.
 3. Network Enum With Nmap.
 
 ---
