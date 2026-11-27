@@ -43,7 +43,7 @@ I am a cyber security learner building practical, hands-on skills — and docume
 
 Every solved lab has a full write-up (Lab Name, Vulnerability Type, Difficulty, Solution, Practical Explanation, Lessons Learned, Mitigation) in [`labs/`](https://github.com/cybersafetywitharbaz/cyber-safety-with-arbaz/tree/main/labs).
 
-### PortSwigger Web Security Academy — 129 / 274 labs solved
+### PortSwigger Web Security Academy — 151 / 274 labs solved
 
 - **SQL Injection:** 15/18
 - **Cross-Site Scripting (XSS):** 29/30
@@ -61,6 +61,9 @@ Every solved lab has a full write-up (Lab Name, Vulnerability Type, Difficulty, 
 - **OAuth:** 6/6 — topic complete
 - **HTTP Host Header:** 7/7 — topic complete
 - **WebSockets:** 3/3 — topic complete
+- **Web Cache Poisoning:** 12/13 (only Lab 9 URL normalization blocked — needs browser "Deliver link to victim"; poison holds, TTL ~10s)
+- **Web Cache Deception:** 5/5 — topic complete (Labs 1–5 solved 27 Nov 2026)
+- **Insecure Deserialization:** 5/10 (Labs 1, 2, 3, 4 + 9 solved 27 Nov 2026; Labs 5, 6, 7, 8 blocked — Academy edge outage, all instances HTTP 504 since ~09:43 PKT; Lab 10 blocked — PHAR file safety flag)
 
 ### TryHackMe — 42 rooms completed (Level 34)
 
