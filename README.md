@@ -71,9 +71,9 @@ Profile: [tryhackme.com/p/arbazchuahan](https://tryhackme.com/p/arbazchuahan) �
 
 See [`labs/tryhackme-progress-2026-11-24.md`](labs/tryhackme-progress-2026-11-24.md) for the room list.
 
-### Hack The Box Academy — 9 / 413 modules (Level 13)
+### Hack The Box Academy — 10 / 413 modules (Level 14)
 
-Profile: [@cybersafetywitharbaz](https://profile.hackthebox.com/profile/019d69b3-3719-727d-ab6e-fb4ea34e5a95) — Beginner Grade 3/3, 122 cubes. Completed: Learning Process, Introduction to Academy, Linux Fundamentals, Introduction to Web Applications, Web Requests, Web Fuzzing, Bug Bounty Hunting Process, Brief Intro to Hardware Attacks.
+Profile: [@cybersafetywitharbaz](https://profile.hackthebox.com/profile/019d69b3-3719-727d-ab6e-fb4ea34e5a95) — Beginner Grade 3/3, 125 cubes. Completed: Learning Process, Introduction to Academy, Linux Fundamentals, Introduction to Web Applications, Web Requests, Web Fuzzing, Bug Bounty Hunting Process, Brief Intro to Hardware Attacks, JavaScript Deobfuscation (100%, 28 Nov 2026).
 
 See [`labs/hackthebox-academy-progress-2026-11-24.md`](labs/hackthebox-academy-progress-2026-11-24.md) for full progress.
 
